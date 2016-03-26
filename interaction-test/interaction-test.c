@@ -27,7 +27,6 @@ int main() {
     usart_transmit(33);
     for(;;) {
         if (has_recieved > 0 && !is_in_progress) {            
-            //_delay_ms(100);
             write_pin(&PORTD, PORTD4, 1);
             usart_transmit(data + 1);
             is_in_progress = true;
