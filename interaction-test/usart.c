@@ -7,7 +7,7 @@ void usart_init(unsigned int ubrr) {
     // enable tx & rx
     UCSR0B |= (1<<RXEN0)|(1<<TXEN0);
     // 8bit, 2 stops
-    UCSR0C |= (1<<USBS0)|(3<<UCSZ00);
+    UCSR0C |= (3<<UCSZ00); // (1<<USBS0)|
 }
 
 void usart_transmit(unsigned char data) {
@@ -18,7 +18,19 @@ void usart_transmit(unsigned char data) {
     UDR0 = data;
 }
 
-void usart_enable_rx_interrupt(void) {
-    UCSR0B |= (1<<RXCIE0) | (1<<TXCIE0);
+void usart_switch_rx_interrupt(bool state) {
+    if (state) {
+        UCSR0B |= (1<<RXCIE0);
+    } else {
+        UCSR0B &= ~(1<<RXCIE0);
+    }
+}
+
+void usart_switch_tx_interrupt(bool state) {
+    if (state) {
+        UCSR0B |= (1<<TXCIE0);
+    } else {
+        UCSR0B &= ~(1<<TXCIE0);
+    }
 }
 
