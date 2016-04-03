@@ -20,21 +20,22 @@ void setup() {
   pinMode(PIN_TX_MASTER, OUTPUT);
   pinMode(PIN_TX_SLAVE, OUTPUT);
 
-  Serial.begin(4800);
+  Serial.begin(19200);
   while (!Serial) {   
   }
   
-  master.begin(9600);
-  slave.begin(9600);
+  master.begin(19200);
+  slave.begin(19200);
 
   hubId = shiftIn(PIN_ID_DATA, PIN_ID_CLOCK, MSBFIRST);
+  Serial.write(hubId);
 }
 
 void loop() {
   master.listen();
   if (master.available()) {
      bytesRead = master.readBytes(command, PACKET_LENGTH);
+     slave.write(hubId);
      slave.write(command, bytesRead);
   }
-  delay(1000);
 }
