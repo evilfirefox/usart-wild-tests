@@ -43,11 +43,11 @@ void loop() {
   master.listen();
   if (master.available()) {
     int id = master.read();
-    if (id != hubId) {
-      Serial.write(id);
+    Serial.write(id);
+    if (id != hubId) {     
       return;
     }
-    bytesRead = master.readBytes(command, PACKET_LENGTH);
+    /*bytesRead = master.readBytes(command, PACKET_LENGTH);
     int i = 0;
     for (i = 0; i < 3; i++) {
       slave.write(i);
@@ -61,6 +61,6 @@ void loop() {
     for (i = 0; i < 3; i++) {
       master.write(i);
       master.write(response[i], PACKET_LENGTH);
-    }
+    }*/
   }
 }
