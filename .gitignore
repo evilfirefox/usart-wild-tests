@@ -3,3 +3,5 @@ interaction-test/default/
 *.DBK
 oscillograms/
 *.PWI
+*.hex
+*.SDF
