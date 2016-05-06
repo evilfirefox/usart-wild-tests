@@ -51,7 +51,7 @@ void loop() {
     }
     bytesReadSerial = Serial.readBytes(data, PACKET_LENGTH);
     digitalWrite(PIN_DIRECTION_MASTER, HIGH);
-    master.write(id);
+    master.write(slaveId);
     master.write(data, PACKET_LENGTH);
     digitalWrite(PIN_DIRECTION_MASTER, LOW);
     Serial.println("packet sent");
